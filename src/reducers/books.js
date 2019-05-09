@@ -1,16 +1,34 @@
 import * as types from '../constants/ActionTypes'
 
 const initialState = {
-    books: []
+    books : []
 };
 
-export default function books(state = initialState, action) {
+export function booksHasErrored(state = false, action) {
     switch (action.type) {
-        case types.REQUEST_BOOKS:
-            const id = 1;
-            return {
-                books : [{id : id, author : "Иван Иваныч Говнов", bookName : "Ссаная книга Говнова c просто пиздец каким дохуя длинным названием", price : 3}]
-            };
+        case "BOOKS_HAS_ERRORED":
+            return action.hasErrored;
+
+        default:
+            return state;
     }
-    return state
+}
+
+export function booksLoading(state = false, action) {
+    switch (action.type) {
+        case "BOOKS_IS_LOADING":
+            return action.isLoading;
+
+        default:
+            return state;
+    }
+}
+
+export function books(state = [], action) {
+    switch (action.type) {
+        case 'BOOKS_FETCH_DATA_SUCCESS':
+            return action.books;
+        default:
+            return state;
+    }
 }

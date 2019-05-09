@@ -9,7 +9,7 @@ class Main extends Component {
         return (
             <main>
                 <Switch>
-                    <Route exact path='/' render = {(props) => <BooksList {...props} store = {store}/>}/>
+                    <Route exact path='/' render = {(props) => <BooksList {...props}/>}/>
                     <Route path='/about' render = {(props) => <About {...props} store = {store}/>}/>
                 </Switch>
             </main>);

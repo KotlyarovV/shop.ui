@@ -1,32 +1,29 @@
 import React, {Component} from "react";
 import Book from './Book.js'
-import * as BookActions from './actions/BookActions'
+import {connect} from 'react-redux'
+import {booksFetchData} from './actions/BookActions'
 
-export default class BooksList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = this.props.store.getState();
-    }
-
-    componentDidMount ()  {
-        let store = this.props.store;
-        store.dispatch(BookActions.requestBooks({}));
-        this.unsubscribe = store.subscribe(() => this.setState(store.getState()))
-        this.setState(store.getState())
-    };
-
-    componentWillUnmount() {
-        this.unsubscribe();
+class BooksList extends Component {
+    componentDidMount() {
+        this.props.fetchData()
     }
 
     render() {
         const productsStyle = {
 			display : 'flex',
-            flexWrap : 'wrap'
+            flexWrap : 'wrap',
+            textAlign: 'center',
+            justifyContent: 'center',
+            //alignContent: 'space-between'
 		};
 
-		const books = this.state.books.books
-            .map(book => <Book author={book.author} bookName = {book.bookName} price = {book.price}/>);
+        console.log(this.props.books);
+    	const books = this.props.books
+            .map(book => <Book
+
+                author={book.author}
+                bookName = {book.bookName}
+                price = {book.price}/>);
 
         return (
             <div style={productsStyle}>
@@ -34,3 +31,20 @@ export default class BooksList extends Component {
             </div>)
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+      books : state.books,
+      hasErrored : state.booksHasErrored,
+      isLoading : state.booksIsLoading
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => dispatch(booksFetchData())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooksList);
