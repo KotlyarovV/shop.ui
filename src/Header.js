@@ -1,7 +1,19 @@
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 
+
+class LoginForm extends Component{
+
+    render() {
+
+        let hasCookie = false;
+
+        return (
+          <div>{hasCookie ? "Профиль" : "Вход/Регистрация"}</div>
+        );
+    }
+}
 
 class Header extends Component {
 
@@ -25,6 +37,12 @@ class Header extends Component {
             padding: '20px'
         };
 
+        var personHasCookie = false;
+
+        var persSettings = personHasCookie
+            ? { link : '/person', text : "Профиль"}
+            : { link : '/registration', text : "Вход/Регистрация" };
+
         return (
             <header style={headerStyle}>
                 <div >
@@ -40,7 +58,7 @@ class Header extends Component {
                             <Link style={linkStyle} to='/order'>Корзинка</Link>
                         </span>
                         <span>
-                            <Link style={linkStyle} to='/person'>Вход/Регистрация</Link>
+                            <Link style={linkStyle} to={persSettings.link}>{persSettings.text}</Link>
                         </span>
                     </nav>
                 </div>
@@ -50,7 +68,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    console.log(state);
     return {
         books : state.books,
         hasErrored : state.booksHasErrored,

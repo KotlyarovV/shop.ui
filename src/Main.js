@@ -3,6 +3,7 @@ import BooksList from './BooksList.js'
 import About from './About.js'
 import { Switch, Route } from 'react-router-dom'
 import store from './store/configureStore'
+import RegistrationForm from './RegistrationForm'
 
 class Main extends Component {
     render () {
@@ -11,6 +12,7 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' render = {(props) => <BooksList {...props}/>}/>
                     <Route path='/about' render = {(props) => <About {...props} store = {store}/>}/>
+                    <Route path='/registration' render = {(props) => <RegistrationForm/>}/>
                 </Switch>
             </main>);
     }

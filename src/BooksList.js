@@ -33,7 +33,6 @@ class BooksList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
       books : state.books,
       hasErrored : state.booksHasErrored,

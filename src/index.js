@@ -6,14 +6,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
 import store from './store/configureStore.js'
+import {CookiesProvider} from "react-cookie";
 
 
 ReactDOM.render((
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>
+    <CookiesProvider>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+    </CookiesProvider>
     ), document.getElementById('root'));
 
 

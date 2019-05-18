@@ -8,7 +8,7 @@ export function booksFetchData() {
               if (!response.ok) {
                   throw Error(response.statusText);
               }
-
+    
               dispatch(booksIsLoading(false));
               return response;
           })
@@ -35,7 +35,6 @@ export function booksIsLoading(bool) {
 }
 
 export function booksFetchDataSucccess(books) {
-    console.log(books)
     return {
         type : "BOOKS_FETCH_DATA_SUCCESS",
         books
