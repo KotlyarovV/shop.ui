@@ -2,23 +2,13 @@ import {Link} from 'react-router-dom'
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 
-
-class LoginForm extends Component{
-
-    render() {
-
-        let hasCookie = false;
-
-        return (
-          <div>{hasCookie ? "Профиль" : "Вход/Регистрация"}</div>
-        );
-    }
-}
-
 class Header extends Component {
 
     personSetting() {
-
+        console.log('user')
+        console.log(this.props.user)
+        console.log(this.props.user !== null)
+        return this.props.user !== null;
     }
 
     render() {
@@ -37,11 +27,11 @@ class Header extends Component {
             padding: '20px'
         };
 
-        var personHasCookie = false;
-
-        var persSettings = personHasCookie
+        var persSettings = this.personSetting()
             ? { link : '/person', text : "Профиль"}
-            : { link : '/registration', text : "Вход/Регистрация" };
+            : { link : '/login', text : "Вход/Регистрация" };
+
+        console.log(persSettings)
 
         return (
             <header style={headerStyle}>
@@ -71,6 +61,7 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         books : state.books,
+        user : state.user,
         hasErrored : state.booksHasErrored,
         isLoading : state.booksIsLoading
     };

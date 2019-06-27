@@ -1,10 +1,7 @@
 import React, {Component} from "react";
-import {booksFetchData} from "./actions/BookActions";
 import {connect} from "react-redux";
 import {postRegistration} from "./actions/RegisterAction";
-
-
-
+import {Redirect} from "react-router-dom";
 
 class RegistrationForm extends Component {
 
@@ -70,9 +67,9 @@ class RegistrationForm extends Component {
     };
 
     send = () => {
-      //  if (!this.validate()) {
-        //    return
-        //};
+        if (!this.validate()) {
+            return
+        }
         const data = {
             email : this.getEmail.value,
             first_name : this.getName.value,
@@ -92,6 +89,13 @@ class RegistrationForm extends Component {
 
 
     render() {
+
+        if (this.props.user) {
+            return (
+                <Redirect to='/person' />
+            )
+        }
+
         const formStyle = {
             display : 'flex',
             flexDirection : 'column',
@@ -136,12 +140,13 @@ class RegistrationForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        user : state.user
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        postData: (data) => dispatch(postRegistration(data))
+        postData: (data) => dispatch(postRegistration(data)),
     };
 };
 

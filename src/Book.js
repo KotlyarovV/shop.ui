@@ -23,7 +23,7 @@ function Book(props) {
     };
 
     return (
-        <div style={productStyle}>
+        <div style={productStyle} onClick={props.onClick}>
             <img src={props.image} style={imageStyle} />
             <div style={textBlockStyle}>
                 <div style={{
