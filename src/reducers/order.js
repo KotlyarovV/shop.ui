@@ -14,6 +14,9 @@ export function order(state = [], action) {
         case 'DELETE_BOOK':
             return state.filter(b => b.book !== action.book);
 
+        case 'CLEAR_ORDER':
+            return [];
+
         default:
             return state;
     }

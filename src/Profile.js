@@ -34,7 +34,13 @@ class Profile extends Component {
         console.log(this.props.user)
         return (
             <div style={userStyle}>
-                {this.props.user.last_name}
+                {this.props.user.last_name + ' ' + this.props.user.first_name}<br/>
+                {this.props.user.email}<br/>
+                Адрес : {this.props.user.profile.address}<br/>
+                Страна : {this.props.user.profile.country}<br/>
+                Город : {this.props.user.profile.city}<br/>
+                Дата рождения : {this.props.user.profile.dob}<br/>
+                Почтовый индекс : {this.props.user.profile.zip}<br/>
             </div>
         )
     }

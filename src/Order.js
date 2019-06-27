@@ -16,7 +16,7 @@ const cardsStyle = {
 class Order extends Component{
     constructor(props) {
         super(props);
-        this.state = {useUserAddress : false}
+        this.state = {useUserAddress : false, isSend : false}
     }
 
     formOrder = () => {
@@ -30,6 +30,7 @@ class Order extends Component{
         };
 
         this.props.sendOrder(formedOrder);
+        this.setState({...this.state, isSend : true});
     };
 
     updateBooks = (bookId, newNumber) => {
@@ -65,6 +66,7 @@ class Order extends Component{
     };
 
     createOrderInfo = () => {
+
       if (!this.props.user)  {
           return (
               <div>
@@ -94,6 +96,14 @@ class Order extends Component{
     };
 
     render() {
+
+        if (this.state.isSend)  {
+            return (
+                <div>
+                    Ваш заказ отправлен
+                </div>
+            )
+        }
 
         const booksInOrder = this.props.order.map((b) => {
             return {book : this.props.books.find(book => book.id === b.book), quantity :b.quantity}
