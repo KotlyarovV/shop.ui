@@ -1,23 +1,9 @@
-import * as types from '../constants/ActionTypes'
-
-const initialState = {
-    books : []
-};
+import * as Type from "../constants/ActionTypes";
 
 export function booksHasErrored(state = false, action) {
     switch (action.type) {
-        case "BOOKS_HAS_ERRORED":
+        case Type.BOOKS_HAS_ERRORED:
             return action.hasErrored;
-
-        default:
-            return state;
-    }
-}
-
-export function booksLoading(state = false, action) {
-    switch (action.type) {
-        case "BOOKS_IS_LOADING":
-            return action.isLoading;
 
         default:
             return state;
@@ -26,7 +12,7 @@ export function booksLoading(state = false, action) {
 
 export function books(state = [], action) {
     switch (action.type) {
-        case 'BOOKS_FETCH_DATA_SUCCESS':
+        case Type.BOOKS_FETCH_DATA_SUCCESS:
             return action.books;
         default:
             return state;

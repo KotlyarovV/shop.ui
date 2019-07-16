@@ -1,8 +1,10 @@
+import * as Type from "../constants/ActionTypes";
+
 export function user(state = null, action) {
     switch (action.type) {
-        case 'USER_FETCH_DATA_SUCCESS':
+        case Type.USER_FETCH_DATA_SUCCESS:
             return action.user;
-        case 'USER_FETCH_DATA_ERROR':
+        case Type.USER_FETCH_DATA_ERROR:
             return null;
         default:
             return state;

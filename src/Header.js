@@ -5,9 +5,6 @@ import {connect} from "react-redux";
 class Header extends Component {
 
     personSetting() {
-        console.log('user')
-        console.log(this.props.user)
-        console.log(this.props.user !== null)
         return this.props.user !== null;
     }
 

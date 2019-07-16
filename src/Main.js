@@ -15,8 +15,8 @@ class Main extends Component {
                 <Switch>
                     <Route exact path='/' render = {(props) => <BooksList {...props}/>}/>
                     <Route path='/about' render = {(props) => <About {...props} store = {store}/>}/>
-                    <Route path='/registration' render = {(props) => <RegistrationForm/>}/>
-                    <Route path='/login' render={(props) => <Login/>}/>
+                    <Route path='/registration' render = {() => <RegistrationForm/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
                     <Route path='/person' render={(props) => <Profile {...props}/>}/>
                     <Route path='/order' render={(props) => <Order {...props}/>}/>
                 </Switch>

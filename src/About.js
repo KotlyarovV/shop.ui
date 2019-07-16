@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
-
 
 class About extends Component {
     render() {

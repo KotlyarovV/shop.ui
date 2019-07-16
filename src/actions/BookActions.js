@@ -1,42 +1,34 @@
+import * as Type from '../constants/ActionTypes'
+import {BOOKS_URL} from "../constants/Urls";
 
 export function booksFetchData() {
     return (dispatch) => {
-      dispatch(booksIsLoading(true));
-
-      fetch("http://127.0.0.1:8000/books/")
+      fetch(BOOKS_URL)
           .then((response) => {
               if (!response.ok) {
                   throw Error(response.statusText);
               }
     
-              dispatch(booksIsLoading(false));
               return response;
           })
           .then((response) => {
               return response.json()
           })
-          .then((books) => dispatch(booksFetchDataSucccess(books)))
+          .then((books) => dispatch(booksFetchDataSuccess(books)))
           .catch(() => dispatch(booksHasErrored(true)));
     };
 }
 
 export function booksHasErrored(bool) {
     return {
-        type : "BOOKS_HAS_ERRORED",
+        type : Type.BOOKS_HAS_ERRORED,
         hasErrored : bool
     }
 }
 
-export function booksIsLoading(bool) {
-    return{
-        type : "BOOKS_IS_LOADING",
-        isLoading : bool
-    }
-}
-
-export function booksFetchDataSucccess(books) {
+export function booksFetchDataSuccess(books) {
     return {
-        type : "BOOKS_FETCH_DATA_SUCCESS",
+        type : Type.BOOKS_FETCH_DATA_SUCCESS,
         books
     }
 }

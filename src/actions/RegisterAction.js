@@ -1,7 +1,9 @@
+import * as Type from '../constants/ActionTypes'
+import {AUTH_URL, USER_URL} from "../constants/Urls";
 
 export function fetchUser(userId) {
     return (dispatch) => {
-            fetch(`http://127.0.0.1:8000/users/${userId}/`, {
+            fetch(`${USER_URL}${userId}/`, {
                 method: 'GET',
                 credentials : 'include',
             })
@@ -10,21 +12,21 @@ export function fetchUser(userId) {
             })
             .then((r) => {
                 if (r.detail) {
-                    dispatch(userFetchDataProplem())
+                    dispatch(userFetchDataProblem())
                 }
                 else {
                     dispatch(userFetchDataSuccess(r));
                 }
             })
             .catch((e) => {
-                dispatch(userFetchDataProplem())
+                dispatch(userFetchDataProblem())
             });
     }
 }
 
 export function postLogin(data) {
     return (dispatch) => {
-          fetch("http://127.0.0.1:8000/auth/login/", {
+          fetch(AUTH_URL, {
               method:"POST",
               credentials : 'include',
               body : JSON.stringify(data),
@@ -37,32 +39,30 @@ export function postLogin(data) {
                   return response.json();
               })
               .then((data) => {
-                  console.log(data)
                   fetchUser(data.user.pk)(dispatch);
               })
-              .catch((e) => {
-                  dispatch(userFetchDataProplem())
+              .catch(() => {
+                  dispatch(userFetchDataProblem())
               });
     };
 }
 
 export function userFetchDataSuccess(user) {
     return {
-        type : "USER_FETCH_DATA_SUCCESS",
+        type : Type.USER_FETCH_DATA_SUCCESS,
         user
     }
 }
 
-export function userFetchDataProplem(user) {
+export function userFetchDataProblem() {
     return {
-        type : "USER_FETCH_DATA_ERROR",
+        type : Type.USER_FETCH_DATA_ERROR,
     }
 }
 
 export function postRegistration(data) {
     return (dispatch) => {
-        fetch("http://127.0.0.1:8000/users/", {
-                //credentials : 'include',
+        fetch(USER_URL, {
                 headers : {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -73,20 +73,16 @@ export function postRegistration(data) {
             .then((response) => {
                 return response.json();
             })
-            .then((user) => {
-                const userId = user.url.substring(28, user.url.length - 1);
-                console.log(data)
+            .then(() => {
                 const loginData = {
                     email: data.email,
                     username : data.email,
                     password: data.password
                 };
-                console.log(loginData)
                 postLogin(loginData)(dispatch)
-               // fetchUser(userId)(dispatch);
             })
-            .catch((e) => {
-                dispatch(userFetchDataProplem())
+            .catch(() => {
+                dispatch(userFetchDataProblem())
             });
     }
 }

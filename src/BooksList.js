@@ -7,12 +7,8 @@ import {addBookToOrder, deleteBookFromOrder} from "./actions/OrderActions";
 
 const customStyles = {
     content : {
-       // top                   : '50%',
         left                  : '25%',
         textAlign : 'center',
-        //right                 : '40%',
-        //bottom                : 'auto',
-        //transform             : 'translate(-50%, -50%)',
         width : '50%'
     }
 };
@@ -103,8 +99,7 @@ class BooksList extends Component {
             flexWrap : 'wrap',
             textAlign: 'center',
             justifyContent: 'center',
-            //alignContent: 'space-between'
-		};
+       };
 
         console.log(this.props.books);
     	const books = this.props.books
@@ -158,7 +153,6 @@ const mapStateToProps = (state) => {
     return {
       books : state.books,
       hasErrored : state.booksHasErrored,
-      isLoading : state.booksIsLoading,
       order : state.order
     };
 };
